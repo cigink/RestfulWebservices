@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:int-http="http://www.springframework.org/schema/integration/http"
+	xmlns:int-stream="http://www.springframework.org/schema/integration/stream"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-4.0.xsd
+		http://www.springframework.org/schema/integration/http http://www.springframework.org/schema/integration/http/spring-integration-http-4.0.xsd
+		http://www.springframework.org/schema/integration/stream http://www.springframework.org/schema/integration/stream/spring-integration-stream-4.0.xsd">
+	
+	<!-- 
+		======================================================================
+		===== RequestGateway
+		======================================================================		
+	 -->
+	<int:gateway id="requestGateway" 
+	             service-interface="buildit.integration.RequestGateway"> 
+	             <int:method name="getAllPlants"
+	             			request-channel="getAllPlantsRQChannel" reply-channel="getAllPlantsRPChannel"
+	             			payload-expression="#method">
+	             </int:method>
+	             <int:method name="getPlant"
+	             			request-channel="requestChannel_2" reply-channel="replyChannel_2"
+	             			>
+	             </int:method>
+	</int:gateway>
+	
+	<int:publish-subscribe-channel id="getAllPlantsRQChannel" apply-sequence="true"></int:publish-subscribe-channel>
+	<int:channel id="getAllPlantsRPChannel"></int:channel>
+	<!-- 
+		======================================================================
+		======================================================================		
+	 -->
+	
+	
+	<!-- 
+		======================================================================		
+		===== RequestGateway.getAllPlants
+		======================================================================		
+	 -->
+  	<int-http:outbound-gateway request-channel="getAllPlantsRQChannel" reply-channel="getAllPlantsRPChannel_JSON2JSON"
+					           url="http://localhost:8087/rest/plants"
+					           http-method="GET"
+					           expected-response-type="java.lang.String"/>
+ 	<int:channel id="getAllPlantsRPChannel_JSON2JSON"></int:channel>
+	<int:channel id="getAllPlantsRPChannel_JSON2Obj"></int:channel>
+	
+	<int:transformer input-channel="getAllPlantsRPChannel_JSON2JSON"
+					 output-channel="getAllPlantsRPChannel_JSON2Obj"
+					 method="transformCollection">
+		<bean class="buildit.integration.SirenToHalTransformer"/>
+	</int:transformer>
+	<int:json-to-object-transformer input-channel="getAllPlantsRPChannel_JSON2Obj" 
+					 output-channel="getAllPlantsRPChannel_aggregator"
+    				 type="java.util.List"/>
+    
+    
+    <int-http:outbound-gateway request-channel="getAllPlantsRQChannel" reply-channel="getAllPlantsRPChannel_aggregator"
+				           url="http://localhost:8087/rest/plants"
+				           http-method="GET"
+				           expected-response-type="java.util.List"/>
+				               				 
+    <int:channel id="getAllPlantsRPChannel_aggregator"></int:channel>
+    <int:aggregator input-channel="getAllPlantsRPChannel_aggregator" output-channel="getAllPlantsRPChannel"></int:aggregator>
+			           
+    <!-- 
+		======================================================================		
+		===== RequestGateway.getAllPlants
+		======================================================================		
+	 -->
+    <int-http:outbound-gateway request-channel="requestChannel_2" reply-channel="replyChannelInter1_2"
+				           url="http://localhost:8070/rest/plants/{id}"
+				           http-method="GET"
+				           expected-response-type="java.lang.String">
+			<int-http:uri-variable name="id" expression="payload"/>
+	</int-http:outbound-gateway>
+    
+    <int:channel id="requestChannel_2"></int:channel>
+	<int:channel id="replyChannel_2"></int:channel>
+	<int:channel id="replyChannelInter2_2"></int:channel>
+	<int:channel id="replyChannelInter1_2"></int:channel>
+	<int:transformer input-channel="replyChannelInter1_2" output-channel="replyChannelInter2_2" method="transformSingleInstance">
+		<bean class="buildit.integration.SirenToHalTransformer"/>
+	</int:transformer>
+	<int:json-to-object-transformer input-channel="replyChannelInter2_2" output-channel="replyChannel_2"
+    	type="buildit.Resource.PlantResource"/>
+    
+</beans>

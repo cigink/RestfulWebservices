@@ -1,0 +1,20 @@
+[
+    {
+        "operation": "shift",
+        "spec": {
+            "links": {
+                "*": {
+                    "rel": {
+                        "*": "links[&2].rel"
+                    },
+                    "href": "links[&1].href"
+                }
+            },
+            "properties": {
+                "name": "name",
+                "description": "description",
+                "price": "price"
+            }
+        }
+    }
+]

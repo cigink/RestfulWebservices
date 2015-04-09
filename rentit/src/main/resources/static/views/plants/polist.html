@@ -1,0 +1,77 @@
+<div class="panel panel-default">
+	<div class="panel-heading"><h3><strong>List Purchase Order</strong></h3></div>
+	<div class="panel-body">
+<!-- 		<a type="button" class="btn btn-info" href="#/phr/create">
+		<strong>Create a Plant Hire Request</strong>
+	</a> -->
+	<a type="button" class="btn btn-info" href="#/main/">
+		<strong>Home</strong>
+	</a>
+	<a type="button" class="btn btn-info" href="#/plants/">
+		<strong>Plants List</strong>
+	</a>
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+                    <th>Plant</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Price</th>
+                    <th>PO Status</th>
+                    <th>Invoice Status</th>
+                    <th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="po in pos">
+					<td>
+						{{po.plant.name}}
+  						<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target=".bs-example-modal-lg"><strong><font color="black">Inspect Plant</font></strong></button>
+						<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby={{phrqst.plant.name}} aria-hidden="true">
+						  <div class="modal-dialog modal-lg">
+						    <div class="modal-content">
+						    <div class="modal-header">
+						    <button type="button" class="close" data-dismiss="modal">&times;</button>
+						    <h4><strong>Plant</strong></h4>
+						    </div>
+						    
+						    <div class="modal-body">		    
+				
+						      <table class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Description</th>
+										<th>Price</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>{{po.plant.name}}</td>
+										<td>{{po.plant.description}}</td>
+										<td>{{po.plant.price}}</td>
+									</tr>
+								</tbody>
+							</table>
+							</div>							     
+						    </div>
+						  </div>
+						</div>
+  					</td>
+					<td>{{po.startDate}}</td>
+					<td>{{po.endDate}}</td>
+					<td>{{po.cost}}</td>
+ 					<td>{{po.status}}</td>
+ 					<td>{{po.instatus}}</td>
+					<td>
+                        <button class="btn btn-default btn-xs" ng-repeat="link in po._links"
+                            ng-class="{'btn-success':link.rel=='acceptPO','btn-danger':link.rel=='rejectPO','btn-primary':link.rel=='updatePO'}"
+                            ng-click="followpo(link)">
+				         <strong>{{link.rel}}</strong>
+				         </button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

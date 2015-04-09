@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>List all Plants</title>
+
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"></link>
+</head>
+<body>
+
+<div class="container">
+<div class="panel panel-default">
+  <div class="panel-heading">List of Plants</div>
+  <div class="panel-body">
+
+    <table id ="PlantCatalog" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="PlantRow" th:each="plant : ${plants}">
+                <td th:text="${plant.name}"></td>
+                <td th:text="${plant.description}"></td>
+                <td th:text="${plant.price}"></td>
+                <td>
+	                <form style ='float:left; padding:5px; height:0px' th:method="post" th:action="@{'/phr'}">
+	                	<input type="hidden" name="plantId" th:value="${plant.id}" />
+	                	<input type="hidden" name="startDate" th:value="${startDate}" />
+	                	<input type="hidden" name="endDate" th:value="${endDate}" />
+	                	<button class="btn btn-default btn-xs" type="submit"><span class="glyphicon glyphicon-check"></span></button>
+	                </form>
+ 				</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+    </div>
+</div>
+
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</body>
+</html>

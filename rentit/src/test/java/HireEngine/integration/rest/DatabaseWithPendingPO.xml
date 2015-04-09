@@ -1,0 +1,5 @@
+<dataset>
+
+    <purchase_order id="10001" plant_id="10001" customer_id="2" start_date="2014-09-22" end_date="2014-09-24" cost="750.00"/>
+
+</dataset>

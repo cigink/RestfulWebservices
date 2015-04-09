@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Plant Hire Request</title>
+
+<link rel="stylesheet"
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"></link>
+</head>
+<body>
+
+	<div class="container">
+		<div class="panel panel-default">
+			<div class="panel-heading">Plant Hire Request</div>
+			<div class="panel-body">
+
+				<dl class="dl-horizontal">
+					<dt>Plant name</dt>
+					<dd th:text="${plant.name}"></dd>
+
+					<dt>Plant description</dt>
+					<dd th:text="${plant.description}"></dd>
+
+					<dt>Start date</dt>
+					<dd th:text="${phr.startDate}"></dd>
+
+					<dt>End date</dt>
+					<dd th:text="${phr.endDate}"></dd>
+
+					<dt>Total price</dt>
+					<dd id="TotalPriceID" th:text="${phr.price}"></dd>
+				</dl>
+				<a class="btn btn-default" href="/phr">Index</a>
+
+			</div>
+		</div>
+	</div>
+
+	<script
+		src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</body>
+</html>

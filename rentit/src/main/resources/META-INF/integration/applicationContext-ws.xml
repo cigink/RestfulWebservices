@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:web-services="http://www.springframework.org/schema/web-services"
+    xmlns:servlet="http://jax-ws.dev.java.net/spring/servlet" xmlns:core="http://jax-ws.dev.java.net/spring/core"
+    xsi:schemaLocation="http://www.springframework.org/schema/web-services 
+    http://www.springframework.org/schema/web-services/web-services.xsd
+        http://jax-ws.dev.java.net/spring/servlet http://jax-ws.dev.java.net/spring/servlet.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://jax-ws.dev.java.net/spring/core http://jax-ws.java.net/spring/core.xsd">
+
+    <servlet:binding url="/soap/SOAPService">
+        <servlet:service>
+            <core:service bean="#SOAPService" />
+        </servlet:service>
+    </servlet:binding>
+    <bean id="SOAPService" class="HireEngine.Soap.SOAP_Service" />
+</beans>

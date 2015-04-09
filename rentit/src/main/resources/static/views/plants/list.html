@@ -1,0 +1,42 @@
+<div class="panel panel-default">
+	<div class="panel-heading"><h3><strong>List of Plants</strong></h3></div>
+	
+	<div class="panel-body">
+		<a type="button" class="btn btn-info" href="#/main/">
+			<strong>Home</strong>
+		</a>
+		<a type="button" class="btn btn-info" href="#/plants/create">
+		<strong>Create a Plant</strong>
+	</a>
+	<a type="button" class="btn btn-info" href="#/pos/">
+		<strong>Purchase Order List</strong>
+	</a>
+				
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Description</th>
+					<th>Price</th>
+					<th>Actions</th> 
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="plant in plants">
+					<td>{{plant.name}}</td>
+					<td>{{plant.description}}</td>
+					<td>{{plant.price}}</td>
+ 					<td> 
+ 					 	<button class="btn btn-primary btn-xs" ng-class="{'btn-primary':link.rel=='deletePlant'}" ng-repeat="link in plant._links" ng-show="!$last" ng-click="follow(link)">
+							<span class="glyphicon glyphicon-pencil"></span> 
+						</button>	
+ 					<button class="btn btn-primary btn-xs" ng-class="{'btn-primary':link.rel=='updatePlant'}" ng-repeat="link in plant._links" ng-show="!$first" ng-click="follow(link)">
+							<span class="glyphicon glyphicon-trash"></span>
+						</button> 
+
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

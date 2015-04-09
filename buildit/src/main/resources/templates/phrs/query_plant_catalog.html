@@ -1,0 +1,36 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>New Plant Hire Request</title>
+
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"></link>
+</head>
+<body>
+
+<div class="container">
+<div class="panel panel-default">
+  <div class="panel-heading">PHR, Creation form</div>
+  <div class="panel-body">
+
+    <form class="form-horizontal" role="form" th:method="post" th:action="@{/phr/query}" >
+      <div class="form-group">
+        <label for="plantName" class="col-sm-2 control-label">Plant name</label>
+        <input id="PlantNameID" type="text" name="plantName"></input>
+      </div>
+      <div class="form-group">
+        <label for="startDate" class="col-sm-2 control-label">Start date</label>
+        <input id="StartDateID" type="date" name="startDate"></input>
+      </div>
+      <div class="form-group">
+        <label for="endDate" class="col-sm-2 control-label">End date</label>
+        <input id="EndDateID" type="date" name="endDate"></input>
+      </div>
+      <button id="SubmitButtonID" class="btn btn-default" type="submit">Query the plant catalog</button>
+    </form>
+  </div>
+  </div>
+</div>
+
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</body>
+</html>

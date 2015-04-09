@@ -1,0 +1,33 @@
+<div class="panel panel-default">
+	<div class="panel-heading">List of Plants</div>
+	<div class="panel-body">
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Description</th>
+					<th>Price</th>
+<!-- 					<th>Actions</th> -->
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="plant in plants">
+					<td>{{plant.name}}</td>
+					<td>{{plant.description}}</td>
+					<td>{{plant.price}}</td>
+<!-- 					<td>
+						<button class="btn btn-default btn-xs">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+						<button class="btn btn-default btn-xs">
+							<span class="glyphicon glyphicon-pencil"></span>
+						</button>
+						<button class="btn btn-default btn-xs">
+							<span class="glyphicon glyphicon-trash"></span>
+						</button>
+					</td> -->
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

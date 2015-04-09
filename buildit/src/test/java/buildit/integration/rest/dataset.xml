@@ -1,0 +1,21 @@
+<dataset>
+    <plant id="10001" name="Excavator" description="1.5 Tonne Mini excavator" price="150.00"/>
+    <plant id="2" name="Excavator" description="3 Tonne Mini excavator" price="200.00"/>
+    <plant id="3" name="Excavator" description="5 Tonne Midi excavator" price="250.00"/>
+    <plant id="4" name="Excavator" description="8 Tonne Midi excavator" price="300.00"/>
+    <plant id="5" name="Excavator" description="15 Tonne Large excavator" price="400.00"/>
+    <plant id="6" name="Excavator" description="20 Tonne Large excavator" price="450.00"/>
+    <plant id="7" name="Dumper" description="1.5 Tonne Hi-Swivel Dumper" price="150.00"/>
+    <plant id="8" name="Dumper" description="2 Tonne Front Tip Dumper" price="180.00"/>
+    <plant id="9" name="Dumper" description="3 Tonne Front Tip Dumper" price="200.00"/>
+    <plant id="10" name="Dumper" description="6 Tonne Front Tip Dumper" price="300.00"/>    
+    <plant id="11" name="Dumper" description="10 Tonne Front Tip Dumper" price="400.00"/>
+    <plant id="12" name="Loader" description="Hewden Backhoe Loader" price="200.00"/>
+    <plant id="13" name="Truck" description="15 Tonne Articulating Dump Truck" price="300.00"/>
+    <plant id="14" name="Truck" description="30 Tonne Articulating Dump Truck" price="400.00"/>
+
+    <customer id="1" name="BuildIt" vat_number="20100915ABCD" />
+    <customer id="2" name="Men at work" vat_number="20121015ABCD" />
+
+    <purchase_order id="10001" plant_id="10001" customer_id="2" start_date="2014-09-22" end_date="2014-09-24" cost="750.00"/>
+ </dataset>

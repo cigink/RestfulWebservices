@@ -1,0 +1,26 @@
+language: java
+
+jdk:
+   - oraclejdk8
+
+env:
+  global:
+    - APP_NAME=HireEngine
+    - DATABASE_URL=postgres://postgres:@localhost:5432/rentitdb
+
+before_script:
+   - sudo npm install -g api-mock
+   - psql -c 'create database rentitdb;' -U postgres
+   - mkdir -p shippable/testresults
+   - mkdir -p shippable/codecoverage
+
+script:
+   - bash -c "api-mock ./apiary/buildit-final.md --cors-disable --port 3000 &"
+   - mvn surefire:test
+
+after_success :
+  - mvn clean cobertura:cobertura
+  - git push -f git@heroku.com:$APP_NAME.git master
+
+
+  

@@ -1,0 +1,11 @@
+{ 
+  "plant": {
+    "id": 10005,
+    "name": "Excavator",
+    "description": "15 Tonne Large excavator"
+    },
+  "price": 400,
+  "startDate": "2014-10-06",
+  "endDate": "2014-10-10",
+  "status": "ACCEPTED"
+}
